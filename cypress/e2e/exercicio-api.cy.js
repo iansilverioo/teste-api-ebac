@@ -4,7 +4,7 @@ import { faker } from '@faker-js/faker';
 
 describe('Testes da Funcionalidade Usuários', () => {
   
-  it.only('Deve validar contrato de usuários', () => {
+  it('Deve validar contrato de usuários', () => {
     cy.request('usuarios').then(response => {
       return contrato.validateAsync(response.body)
   })
@@ -21,7 +21,7 @@ describe('Testes da Funcionalidade Usuários', () => {
   });
 
   it('Deve cadastrar um usuário com sucesso', () => {
-    cy.cadastrarUsuario('Ian Silvério' , 'iansilverio@gmail.com' , 'teste')
+    cy.cadastrarUsuario(faker.person.fullName() , faker.internet.email() , 'teste')
     .should((response) => {
       expect(response.status).equal(201)
       expect(response.body.message).equal('Cadastro realizado com sucesso')
